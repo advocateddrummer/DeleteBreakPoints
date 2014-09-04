@@ -1,5 +1,13 @@
 package require PWI_Glyph 2.17.2
 
+#
+# This script deletes all break points on connectors specified by the user. The
+# user can either run the script on connectors selected at runtime, or can
+# select the desired connectors after the script has been started. In the case
+# that the user has preselected the connectors, the script will delete break
+# points contains by the selected connectors and exit. In either case, the
+# script does not ask the user for more connectors.
+
 # Run script on selected connectors if there are any.
 set mask [pw::Display createSelectionMask -requireConnector {Dimensioned}]
 pw::Display getSelectedEntities -selectionmask $mask connectors
