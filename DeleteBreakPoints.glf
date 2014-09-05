@@ -27,16 +27,21 @@ if {$nCons == 0} {
 
 set nCons [llength $connectors(Connectors)]
 
+# Break point counter.
+set nBreakPoints 0
+
 puts "Deleting break points from $nCons [expr ($nCons==1)?"connector":"connectors"]... "
 
 set modifyMode [pw::Application begin Modify $connectors(Connectors)]
 
 # Delete break points.
 foreach con $connectors(Connectors) {
+  # Count deleted break point.
+  incr nBreakPoints [expr [$con getSubConnectorCount] - 1]
   $con removeAllBreakPoints
 }
 
 $modifyMode end
 unset modifyMode
 
-puts "Break points deleted"
+puts "$nBreakPoints Break [expr ($nBreakPoints==1)?"point":"points"] deleted"
